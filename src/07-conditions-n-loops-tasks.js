@@ -258,7 +258,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  const str = toString(ccn);
+  const str = String(ccn);
   let res = 0;
   if (!((str.length - 1) % 2)) {
     for (let i = 1; i < str.length; i += 2) {
@@ -431,9 +431,9 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  for (let i = 0; i < 3; i + 1) {
+  for (let i = 0; i < 3; i += 1) {
     let a = '';
-    for (let j = 0; j < 3; j + 1) {
+    for (let j = 0; j < 3; j += 1) {
       if (a === '' && position[i][j] !== undefined) {
         a = position[i][j];
       } else if (a[0] === position[i][j]) {
