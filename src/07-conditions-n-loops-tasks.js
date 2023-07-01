@@ -258,7 +258,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  const str = trtring(ccn);
+  const str = toString(ccn);
   let res = 0;
   if (!((str.length - 1) % 2)) {
     for (let i = 1; i < str.length; i += 2) {
@@ -369,9 +369,9 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  const path = pathes[0].split('/');
-  const wrong = path
-    .find((el, i) => !pathes.every((path) => path.split('/')[i] === el));
+  const dir = pathes[0].split('/');
+  const wrong = dir
+    .find((el, i) => !pathes.every((item) => item.split('/')[i] === el));
   return pathes[0].slice(0, pathes[0].indexOf(wrong));
 }
 
@@ -396,7 +396,7 @@ function getCommonDirectoryPath(pathes) {
  */
 function getMatrixProduct(m1, m2) {
   const sum = new Array(m1.length).fill(new Array(m2[0].length).fill(0));
-  return sum.map((a, i) => a.map((_, j) => m1[i].reduce((res, l, k) => rls + (l * m2[k][j]), 0)));
+  return sum.map((a, i) => a.map((_, j) => m1[i].reduce((res, l, k) => res + (l * m2[k][j]), 0)));
 }
 
 
@@ -431,9 +431,9 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i + 1) {
     let a = '';
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < 3; j + 1) {
       if (a === '' && position[i][j] !== undefined) {
         a = position[i][j];
       } else if (a[0] === position[i][j]) {

@@ -112,10 +112,10 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-class cssClass {
+class CssClass {
   constructor(value, el = false) {
     this.value = value;
-    this.elem = em;
+    this.elem = el;
     this.err1 = 'Element, id and pseudo-element should not occur more then one time inside the selector';
     this.err2 = 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element';
   }
@@ -123,33 +123,33 @@ class cssClass {
   element(val) {
     if (this.elem) throw new Error(this.err1);
     if (this.value) throw new Error(this.err2);
-    return new cssClass(this.value + val, this.elem);
+    return new CssClass(this.value + val, this.elem);
   }
 
   id(val) {
     if (this.value.includes('#')) throw new Error(this.err1);
     if (this.value.includes('.') || this.value.includes('[') || this.value.includes(':') || this.value.includes('::')) throw new Error(this.err2);
-    return new cssClass(`${this.value}#${val}`, this.elem);
+    return new CssClass(`${this.value}#${val}`, this.elem);
   }
 
   class(val) {
     if (this.value.includes('[') || this.value.includes(':') || this.value.includes('::')) throw new Error(this.err2);
-    return new cssClass(`${this.value}.${val}`, this.elem);
+    return new CssClass(`${this.value}.${val}`, this.elem);
   }
 
   attr(val) {
     if (this.value.includes(':') || this.value.includes('::')) throw new Error(this.err2);
-    return new cssClass(`${this.value}[${val}]`, this.elem);
+    return new CssClass(`${this.value}[${val}]`, this.elem);
   }
 
   pseudoClass(val) {
     if (this.value.includes('::')) throw new Error(this.err2);
-    return new cssClass(`${this.value}:${val}`, this.elem);
+    return new CssClass(`${this.value}:${val}`, this.elem);
   }
 
   pseudoElement(val) {
     if (this.value.includes('::')) throw new Error(this.err1);
-    return new cssClass(`${this.value}::${val}`, this.elem);
+    return new CssClass(`${this.value}::${val}`, this.elem);
   }
 
   stringify() {
@@ -159,25 +159,25 @@ class cssClass {
 
 const cssSelectorBuilder = {
   element(value) {
-    return new cssClass(value, true);
+    return new CssClass(value, true);
   },
   id(value) {
-    return new cssClass(`#${value}`);
+    return new CssClass(`#${value}`);
   },
   class(value) {
-    return new cssClass(`.${value}`);
+    return new CssClass(`.${value}`);
   },
   attr(value) {
-    return new cssClass(`[${value}]`);
+    return new CssClass(`[${value}]`);
   },
   pseudoClass(value) {
-    return new cssClass(`:${value}`);
+    return new CssClass(`:${value}`);
   },
   pseudoElement(value) {
-    return new cssClass(`::${value}`);
+    return new CssClass(`::${value}`);
   },
   combine(selector1, combine, selector2) {
-    return new cssClass(`${selector1.stringify()} ${combine} ${selector2.stringify()}`);
+    return new CssClass(`${selector1.stringify()} ${combine} ${selector2.stringify()}`);
   },
 };
 

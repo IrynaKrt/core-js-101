@@ -62,7 +62,7 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
+function getPolynom(...args) {
   return (x) => {
     if (args.length === 3) {
       return (args[0] * x ** 2) + (args[1] * x) + args[2];
@@ -218,6 +218,7 @@ function partialUsingArguments(fn, ...args1) {
  *   getId10() => 11
  */
 function getIdGeneratorFunction(startFrom) {
+  // eslint-disable-next-line no-plusplus, no-param-reassign
   return () => startFrom++;
 }
 
